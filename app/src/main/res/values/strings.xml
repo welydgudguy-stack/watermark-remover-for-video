@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">Watermark Remover</string>
+    <string name="title_video_watermark_remover">Video Watermark Remover</string>
+    <string name="subtitle_watermark_remover">Select unwanted parts &amp; remove them cleanly</string>
+    
+    <!-- Home / Pick Video -->
+    <string name="select_video">Select Video</string>
+    <string name="select_video_desc">Choose a video from your gallery or files</string>
+    <string name="try_sample_video">Try Demo Video with Watermark</string>
+    <string name="sample_video_desc">Test removing watermarks instantly</string>
+    <string name="no_video_selected">No video loaded yet</string>
+    <string name="pick_video_prompt">Pick a video from your device or use the demo video to get started</string>
+    
+    <!-- Editor screen -->
+    <string name="back">Back</string>
+    <string name="export">Export Video</string>
+    <string name="preview">Preview</string>
+    <string name="original">Original</string>
+    <string name="removed">Removed</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="step_forward">+1s</string>
+    <string name="step_backward">-1s</string>
+    <string name="add_watermark_region">Add Removal Area</string>
+    <string name="remove_selected_region">Delete Area</string>
+    <string name="watermark_regions_count">Areas (%1$d)</string>
+    <string name="no_watermark_regions_hint">Tap \"Add Removal Area\" and position the selection box over the watermark</string>
+    
+    <!-- Removal Modes -->
+    <string name="removal_mode">Removal Method</string>
+    <string name="mode_blur">Smooth Blur</string>
+    <string name="mode_mosaic">Pixelate / Mosaic</string>
+    <string name="mode_inpaint">Smart Inpaint / Edge-Blend</string>
+    <string name="mode_crop">Crop Video</string>
+    
+    <!-- Intensity & Settings -->
+    <string name="intensity">Removal Strength</string>
+    <string name="feather">Edge Feathering</string>
+    <string name="preset_watermarks">Quick Position</string>
+    <string name="preset_top_left">Top Left</string>
+    <string name="preset_top_right">Top Right</string>
+    <string name="preset_bottom_left">Bottom Left</string>
+    <string name="preset_bottom_right">Bottom Right</string>
+    <string name="preset_center">Center</string>
+    <string name="reset_areas">Reset All</string>
+    
+    <!-- Processing & Export -->
+    <string name="exporting_video">Exporting Clean Video…</string>
+    <string name="export_progress_format">%1$d%% • Frame %2$d / %3$d</string>
+    <string name="export_encoding">Encoding video stream…</string>
+    <string name="export_muxing">Finalizing &amp; saving to device…</string>
+    <string name="cancel">Cancel</string>
+    <string name="cancel_export">Cancel Export</string>
+    <string name="export_success">Video Saved Successfully!</string>
+    <string name="export_success_desc">Saved to your device gallery (Movies / WatermarkRemover)</string>
+    <string name="play_video">Play Video</string>
+    <string name="share_video">Share Video</string>
+    <string name="done">Done</string>
+    <string name="export_error">Export Failed</string>
+    <string name="retry">Retry</string>
+    <string name="close">Close</string>
+</resources>

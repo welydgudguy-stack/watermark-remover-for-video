@@ -1,0 +1,6 @@
+{
+  "name": "Watermark Remover",
+  "description": "Select unwanted parts from videos such as watermarks or timestamps, preview removal effects, and export the processed video to your device.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
