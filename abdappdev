@@ -1,0 +1,1258 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABD App Development Tech | Innovative Mobile Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* ==========================================
+       CSS STYLES
+       ========================================== */
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --secondary: #0f172a;
+      --accent: #38bdf8;
+      --bg-dark: #090d16;
+      --bg-card: #111827;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #1e293b;
+      --gradient-1: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #06b6d4 100%);
+      --gradient-card: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.8) 100%);
+      --radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header & Navigation */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    }
+
+    .logo span {
+      background: linear-gradient(to right, #ffffff, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--text-main);
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--gradient-1);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(37, 99, 235, 0.5);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-outline:hover {
+      background: var(--border-color);
+      color: #fff;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-main);
+    }
+
+    /* Page Sections (Router Views) */
+    .page-section {
+      display: none;
+      padding-top: 120px;
+      padding-bottom: 80px;
+      min-height: calc(100vh - 300px);
+      animation: fadeIn 0.4s ease-in-out forwards;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hero Section */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 4rem;
+      align-items: center;
+      padding: 4rem 0;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(37, 99, 235, 0.1);
+      border: 1px solid rgba(37, 99, 235, 0.3);
+      border-radius: 50px;
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      letter-spacing: -1px;
+    }
+
+    .hero-title span {
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-description {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .phone-mockup {
+      width: 280px;
+      height: 560px;
+      background: #000;
+      border: 8px solid #1e293b;
+      border-radius: 40px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 40px rgba(37, 99, 235, 0.2);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phone-notch {
+      width: 120px;
+      height: 20px;
+      background: #1e293b;
+      margin: 0 auto;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
+
+    .phone-screen {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+    }
+
+    .app-card-mini {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .app-icon-mini {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--gradient-1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    /* Stats Section */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 4rem 0;
+      padding: 2.5rem;
+      background: var(--gradient-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* Section Headers */
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 3.5rem auto;
+    }
+
+    .section-subtitle {
+      color: var(--primary);
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .section-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .section-description {
+      color: var(--text-muted);
+    }
+
+    /* Filters */
+    .filter-container {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1.25rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* App Cards Grid */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .app-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .app-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .app-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .app-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      color: #fff;
+    }
+
+    .app-info h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .app-category {
+      font-size: 0.8rem;
+      color: var(--accent);
+      background: rgba(56, 189, 248, 0.1);
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .app-description {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .app-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-color);
+      padding-top: 1rem;
+    }
+
+    .app-downloads {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .playstore-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .playstore-btn:hover {
+      color: var(--accent);
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 2rem;
+      border-radius: var(--radius);
+      transition: var(--transition);
+    }
+
+    .feature-card:hover {
+      border-color: var(--primary);
+    }
+
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .feature-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Team / Leadership */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .team-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .team-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+    }
+
+    .team-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: var(--gradient-1);
+      margin: 0 auto 1.25rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #fff;
+    }
+
+    .team-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .team-role {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .team-bio {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Contact Section Layout */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+
+    .contact-info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .contact-details h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-details p, .contact-details a {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .contact-form {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    /* Footer */
+    .footer {
+      background: #04070d;
+      border-top: 1px solid var(--border-color);
+      padding: 4rem 0 2rem 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      max-width: 320px;
+    }
+
+    .footer-title {
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      font-size: 1rem;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--text-main);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border-color);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-title { font-size: 2.75rem; }
+      .hero-buttons { justify-content: center; }
+      .contact-wrapper { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      .nav-links {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: var(--bg-dark);
+        flex-direction: column;
+        padding: 2rem;
+        transition: var(--transition);
+        border-top: 1px solid var(--border-color);
+      }
+      .nav-links.active { left: 0; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER / NAVIGATION -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="#" class="logo" onclick="navigateTo('home')">
+        <div class="logo-icon"><i class="fa-solid fa-layer-group"></i></div>
+        <span>ABD Tech</span>
+      </a>
+      
+      <div class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a class="nav-link active" onclick="navigateTo('home')">Home</a></li>
+        <li><a class="nav-link" onclick="navigateTo('apps')">Our Apps</a></li>
+        <li><a class="nav-link" onclick="navigateTo('about')">About Us</a></li>
+        <li><a class="nav-link" onclick="navigateTo('contact')">Contact</a></li>
+        <li>
+          <a class="btn btn-primary" href="https://play.google.com" target="_blank" rel="noopener">
+            <i class="fa-fab fa-google-play"></i> Google Play
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================
+         PAGE 1: HOME PAGE
+         ========================================== -->
+    <section id="home" class="page-section active">
+      <div class="container">
+        <div class="hero">
+          <div class="hero-content">
+            <div class="hero-badge">
+              <i class="fa-solid fa-rocket"></i> Leading Mobile App Developers
+            </div>
+            <h1 class="hero-title">Crafting Powerful <span>Mobile Experiences</span></h1>
+            <p class="hero-description">
+              ABD App Development Tech builds scalable, high-performance mobile applications on Google Play. From worldwide radio streaming to high-utility mobile productivity tools, we power millions of everyday interactions.
+            </p>
+            <div class="hero-buttons">
+              <button class="btn btn-primary" onclick="navigateTo('apps')">
+                Explore Our 100+ Apps <i class="fa-solid fa-arrow-right"></i>
+              </button>
+              <button class="btn btn-outline" onclick="navigateTo('about')">Learn About Us</button>
+            </div>
+          </div>
+          
+          <div class="hero-visual">
+            <div class="phone-mockup">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <div class="app-card-mini">
+                  <div class="app-icon-mini" style="background: #ef4444;"><i class="fa-solid fa-radio"></i></div>
+                  <div>
+                    <strong style="font-size: 0.85rem; display:block;">Global Country Radio</strong>
+                    <span style="font-size: 0.7rem; color: var(--text-muted);">100+ Country Streams</span>
+                  </div>
+                </div>
+                <div class="app-card-mini">
+                  <div class="app-icon-mini" style="background: #10b981;"><i class="fa-solid fa-font"></i></div>
+                  <div>
+                    <strong style="font-size: 0.85rem; display:block;">Text to Speech Pro</strong>
+                    <span style="font-size: 0.7rem; color: var(--text-muted);">AI Voice Reader</span>
+                  </div>
+                </div>
+                <div class="app-card-mini">
+                  <div class="app-icon-mini" style="background: #8b5cf6;"><i class="fa-solid fa-clock"></i></div>
+                  <div>
+                    <strong style="font-size: 0.85rem; display:block;">Digital Clock LED</strong>
+                    <span style="font-size: 0.7rem; color: var(--text-muted);">Smart Alarm Suite</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STATS BANNER -->
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">100+</div>
+            <div class="stat-label">Published Play Store Apps</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">5M+</div>
+            <div class="stat-label">Global Downloads</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Countries Covered (FM Radio)</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">99.9%</div>
+            <div class="stat-label">Uptime & Reliability</div>
+          </div>
+        </div>
+
+        <!-- FEATURED APPS PREVIEW -->
+        <div class="section-header">
+          <span class="section-subtitle">Portfolio Highlights</span>
+          <h2 class="section-title">Popular Applications</h2>
+          <p class="section-description">A quick look at some of our top-charting mobile applications loved by users globally.</p>
+        </div>
+
+        <div class="apps-grid" id="featuredAppsContainer">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+          <button class="btn btn-outline" onclick="navigateTo('apps')">View Full Application Catalog</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         PAGE 2: APPS / PORTFOLIO PAGE
+         ========================================== -->
+    <section id="apps" class="page-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">App Ecosystem</span>
+          <h2 class="section-title">100+ Applications & Growing</h2>
+          <p class="section-description">Explore our full suite of Android utility, streaming, and productivity apps published on Google Play.</p>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="filter-container">
+          <button class="filter-btn active" onclick="filterApps('all')">All Apps</button>
+          <button class="filter-btn" onclick="filterApps('radio')">Country Radio FM</button>
+          <button class="filter-btn" onclick="filterApps('utility')">Utilities & Tools</button>
+          <button class="filter-btn" onclick="filterApps('audio')">Audio & Voice</button>
+        </div>
+
+        <!-- Full Grid -->
+        <div class="apps-grid" id="allAppsContainer">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         PAGE 3: ABOUT US PAGE
+         ========================================== -->
+    <section id="about" class="page-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Who We Are</span>
+          <h2 class="section-title">Driven by Innovation & Engineering</h2>
+          <p class="section-description">ABD App Development Tech is a tech business focused on building accessible, lightweight, and modern applications for everyday users.</p>
+        </div>
+
+        <!-- FEATURES / VALUES -->
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-globe"></i></div>
+            <h3 class="feature-title">Global Audio Streaming</h3>
+            <p class="feature-desc">We engineered individual Country Radio FM applications delivering crystal-clear online streaming to global audiences.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+            <h3 class="feature-title">High Performance</h3>
+            <p class="feature-desc">Our utility products are built for lightning-fast launch times, ultra-low battery consumption, and lightweight storage footprints.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3 class="feature-title">User Privacy & Security</h3>
+            <p class="feature-desc">Compliance and data safety are embedded at the core of all our developer console frameworks and app updates.</p>
+          </div>
+        </div>
+
+        <!-- LEADERSHIP SECTION -->
+        <div style="margin-top: 5rem;">
+          <div class="section-header">
+            <span class="section-subtitle">Executive Team</span>
+            <h2 class="section-title">Leadership & Directors</h2>
+            <p class="section-description">Meet the team driving product strategy and engineering excellence at ABD Tech.</p>
+          </div>
+
+          <div class="team-grid">
+            <div class="team-card">
+              <div class="team-avatar"><i class="fa-solid fa-user-gear"></i></div>
+              <h3 class="team-name">Weli</h3>
+              <div class="team-role">Chief Executive Officer (CEO)</div>
+              <p class="team-bio">Spearheading organizational growth, vision, and strategic execution across all app development pipelines.</p>
+            </div>
+            <div class="team-card">
+              <div class="team-avatar"><i class="fa-solid fa-code"></i></div>
+              <h3 class="team-name">Abdul</h3>
+              <div class="team-role">Director & Lead Engineer</div>
+              <p class="team-bio">Directing software architecture, Google Play deployments, and modern app monetization framework integration.</p>
+            </div>
+            <div class="team-card">
+              <div class="team-avatar"><i class="fa-solid fa-chart-line"></i></div>
+              <h3 class="team-name">Victor Enakhe</h3>
+              <div class="team-role">Director of Operations</div>
+              <p class="team-bio">Managing app portfolio strategy, user experience quality, and organizational scaling.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         PAGE 4: CONTACT PAGE
+         ========================================== -->
+    <section id="contact" class="page-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Get In Touch</span>
+          <h2 class="section-title">Contact Our Team</h2>
+          <p class="section-description">Have inquiries, feedback, or partnership requests regarding our Google Play apps?</p>
+        </div>
+
+        <div class="contact-wrapper">
+          <div class="contact-info-card">
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div class="contact-details">
+                <h4>Business Email</h4>
+                <a href="mailto:abdappdevelopment.tech@gmail.com">abdappdevelopment.tech@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div class="contact-details">
+                <h4>Headquarters</h4>
+                <p>Africa, Nigeria</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fa-brands fa-google-play"></i></div>
+              <div class="contact-details">
+                <h4>Google Play Store</h4>
+                <p>100+ Published Android Applications</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form">
+            <form id="contactForm" onsubmit="handleFormSubmit(event)">
+              <div class="form-group">
+                <label class="form-label" for="name">Your Name</label>
+                <input type="text" id="name" class="form-control" placeholder="Enter your full name" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email">Email Address</label>
+                <input type="email" id="email" class="form-control" placeholder="name@example.com" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="message">Message</label>
+                <textarea id="message" class="form-control" placeholder="Write your message here..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                Send Message <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo" onclick="navigateTo('home')">
+            <div class="logo-icon"><i class="fa-solid fa-layer-group"></i></div>
+            <span>ABD Tech</span>
+          </a>
+          <p>
+            ABD App Development Tech creates mobile solutions for modern Android platforms. With over 100 applications published globally.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a onclick="navigateTo('home')">Home</a></li>
+            <li><a onclick="navigateTo('apps')">Our Apps</a></li>
+            <li><a onclick="navigateTo('about')">About Us</a></li>
+            <li><a onclick="navigateTo('contact')">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Top App Categories</h4>
+          <ul class="footer-links">
+            <li><a onclick="navigateTo('apps')">Country Radio Series</a></li>
+            <li><a onclick="navigateTo('apps')">Utility Tools</a></li>
+            <li><a onclick="navigateTo('apps')">Audio Processing</a></li>
+            <li><a onclick="navigateTo('apps')">Digital Clocks</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Contact</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:abdappdevelopment.tech@gmail.com">abdappdevelopment.tech@gmail.com</a></li>
+            <li><span style="color: var(--text-muted);">Africa, Nigeria</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 ABD App Development Tech. All rights reserved.</div>
+        <div>Engineered for high performance on Android</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       JAVASCRIPT LOGIC
+       ========================================== -->
+  <script>
+    // APP DATA STORE
+    const appData = [
+      {
+        id: 1,
+        title: "Nigeria FM Radio Online",
+        category: "radio",
+        categoryName: "Country Radio FM",
+        icon: "fa-radio",
+        bg: "linear-gradient(135deg, #059669 0%, #10b981 100%)",
+        description: "Stream live FM stations across all states with ultra-low bandwidth consumption and high quality audio.",
+        featured: true
+      },
+      {
+        id: 2,
+        title: "USA Country Radio FM",
+        category: "radio",
+        categoryName: "Country Radio FM",
+        icon: "fa-broadcast-tower",
+        bg: "linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)",
+        description: "Access thousands of live radio streams from state to state with real-time station detection.",
+        featured: true
+      },
+      {
+        id: 3,
+        title: "Text to Speech Engine",
+        category: "audio",
+        categoryName: "Audio & Voice",
+        icon: "fa-font",
+        bg: "linear-gradient(135deg, #d97706 0%, #f59e0b 100%)",
+        description: "Convert written text into natural human speech offline with multi-language accent support.",
+        featured: true
+      },
+      {
+        id: 4,
+        title: "Digital Clock & Nightstand LED",
+        category: "utility",
+        categoryName: "Utilities & Tools",
+        icon: "fa-clock",
+        bg: "linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%)",
+        description: "Customizable fullscreen desk clock with alarm timers and AMOLED burn-in protection.",
+        featured: true
+      },
+      {
+        id: 5,
+        title: "UK Radio FM Streamer",
+        category: "radio",
+        categoryName: "Country Radio FM",
+        icon: "fa-tower-cell",
+        bg: "linear-gradient(135deg, #dc2626 0%, #ef4444 100%)",
+        description: "Listen to top UK talk shows, sports radio, and music stations smoothly without audio lag.",
+        featured: false
+      },
+      {
+        id: 6,
+        title: "URL Link Shortener Tool",
+        category: "utility",
+        categoryName: "Utilities & Tools",
+        icon: "fa-link",
+        bg: "linear-gradient(135deg, #0284c7 0%, #06b6d4 100%)",
+        description: "Fast link shortening tool with custom alias generator and tap-to-copy clipboard history.",
+        featured: false
+      },
+      {
+        id: 7,
+        title: "Worldwide Offline Dictionary",
+        category: "utility",
+        categoryName: "Utilities & Tools",
+        icon: "fa-book",
+        bg: "linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)",
+        description: "Comprehensive English dictionary and thesaurus app built for complete offline usage.",
+        featured: false
+      },
+      {
+        id: 8,
+        title: "Ghana FM Radio Station",
+        category: "radio",
+        categoryName: "Country Radio FM",
+        icon: "fa-compact-disc",
+        bg: "linear-gradient(135deg, #059669 0%, #34d399 100%)",
+        description: "Live radio stream tuner optimized for seamless background playback and media control.",
+        featured: false
+      }
+    ];
+
+    // ROUTER / PAGE SWITCHER
+    function navigateTo(pageId) {
+      // Hide all page sections
+      const sections = document.querySelectorAll('.page-section');
+      sections.forEach(sec => sec.classList.remove('active'));
+
+      // Show target page section
+      const targetSection = document.getElementById(pageId);
+      if (targetSection) {
+        targetSection.classList.add('active');
+      }
+
+      // Update Navigation Links
+      const links = document.querySelectorAll('.nav-link');
+      links.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('onclick').includes(pageId)) {
+          link.classList.add('active');
+        }
+      });
+
+      // Close Mobile Menu if Open
+      document.getElementById('navLinks').classList.remove('active');
+
+      // Scroll to top smooth
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // RENDER APP CARDS
+    function createAppCardHTML(app) {
+      return `
+        <div class="app-card" data-category="${app.category}">
+          <div class="app-card-header">
+            <div class="app-icon" style="background: ${app.bg};">
+              <i class="fa-solid ${app.icon}"></i>
+            </div>
+            <div class="app-info">
+              <h3>${app.title}</h3>
+              <span class="app-category">${app.categoryName}</span>
+            </div>
+          </div>
+          <p class="app-description">${app.description}</p>
+          <div class="app-footer">
+            <span class="app-downloads"><i class="fa-solid fa-download"></i> Google Play</span>
+            <a href="https://play.google.com" target="_blank" rel="noopener" class="playstore-btn">
+              Get App <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderApps() {
+      const featuredContainer = document.getElementById('featuredAppsContainer');
+      const allContainer = document.getElementById('allAppsContainer');
+
+      // Featured Apps (Home Page)
+      const featuredApps = appData.filter(app => app.featured);
+      featuredContainer.innerHTML = featuredApps.map(app => createAppCardHTML(app)).join('');
+
+      // All Apps (Portfolio Page)
+      allContainer.innerHTML = appData.map(app => createAppCardHTML(app)).join('');
+    }
+
+    // FILTER APPS (Portfolio Page)
+    function filterApps(category) {
+      // Toggle Filter Button State
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      // Filter Logic
+      const cards = document.querySelectorAll('#allAppsContainer .app-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // FORM SUBMISSION HANDLER
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      alert('Thank you for reaching out to ABD App Development Tech. Your message has been noted!');
+      document.getElementById('contactForm').reset();
+    }
+
+    // MOBILE MENU TOGGLE
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('active');
+    });
+
+    // INITIALIZATION
+    document.addEventListener('DOMContentLoaded', () => {
+      renderApps();
+    });
+  </script>
+</body>
+</html>
+
